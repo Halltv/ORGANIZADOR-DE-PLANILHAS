@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilhas de Organização Doméstica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #3b82f6;
+            border-bottom: 2px solid #3b82f6;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 90%;
+            width: 400px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl p-6 md:p-8">
+
+        <!-- Header -->
+        <div class="mb-6 border-b pb-4">
+            <h1 class="text-3xl font-bold text-gray-800">Planilhas de Organização Doméstica</h1>
+            <p class="mt-2 text-gray-600">Ferramentas interativas para gestão do lar.</p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="flex flex-wrap md:flex-nowrap gap-2 md:gap-0 border-b-2 border-gray-200 mb-6">
+            <button class="tab-button active flex-1 py-3 px-4 text-sm md:text-base font-medium text-center text-gray-600 rounded-t-lg transition-colors duration-200" onclick="showTab('tab1')">
+                Cronograma de Limpeza
+            </button>
+            <button class="tab-button flex-1 py-3 px-4 text-sm md:text-base font-medium text-center text-gray-600 rounded-t-lg transition-colors duration-200" onclick="showTab('tab2')">
+                Planejamento de Refeições
+            </button>
+            <button class="tab-button flex-1 py-3 px-4 text-sm md:text-base font-medium text-center text-gray-600 rounded-t-lg transition-colors duration-200" onclick="showTab('tab3')">
+                Controle de Estoque
+            </button>
+            <button class="tab-button flex-1 py-3 px-4 text-sm md:text-base font-medium text-center text-gray-600 rounded-t-lg transition-colors duration-200" onclick="showTab('tab4')">
+                Orçamento Doméstico
+            </button>
+            <button class="tab-button flex-1 py-3 px-4 text-sm md:text-base font-medium text-center text-gray-600 rounded-t-lg transition-colors duration-200" onclick="showTab('tab5')">
+                Tarefas Diárias
+            </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="tab1" class="tab-content">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Cronograma de Limpeza e Manutenção</h2>
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <p class="text-blue-700">Esta planilha permite planejar e acompanhar as tarefas de limpeza e manutenção da casa. Use os campos abaixo para adicionar novas tarefas.</p>
+            </div>
+            
+            <div class="mt-4 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarefa</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Frequência</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Responsável</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="limpeza-table-body" class="bg-white divide-y divide-gray-200">
+                        <!-- Tarefas serão carregadas aqui -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-6 p-4 border rounded-lg bg-gray-50">
+                <h3 class="font-semibold text-gray-700 mb-2">Adicionar Nova Tarefa</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <input type="text" id="limpeza-tarefa" placeholder="Tarefa" class="col-span-1 md:col-span-1 p-2 rounded-lg border focus:ring-blue-500 focus:border-blue-500">
+                    <select id="limpeza-frequencia" class="p-2 rounded-lg border focus:ring-blue-500 focus:border-blue-500">
+                        <option value="Diário">Diário</option>
+                        <option value="Semanal">Semanal</option>
+                        <option value="Quinzenal">Quinzenal</option>
+                        <option value="Mensal">Mensal</option>
+                    </select>
+                    <input type="text" id="limpeza-responsavel" placeholder="Responsável" class="p-2 rounded-lg border focus:ring-blue-500 focus:border-blue-500">
+                    <button onclick="addLimpezaTask()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Adicionar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab2" class="tab-content hidden">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Planejamento de Refeições e Lista de Compras</h2>
+            <div class="bg-green-50 p-4 rounded-lg">
+                <p class="text-green-700">Planeje suas refeições semanais e gere automaticamente uma lista de compras. Use o formulário abaixo para adicionar refeições.</p>
+            </div>
+            
+            <div class="mt-4">
+                <h3 class="font-semibold text-gray-700 mb-2">Planejamento Semanal</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dia</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Café da Manhã</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Almoço</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jantar</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="refeicoes-table-body" class="bg-white divide-y divide-gray-200">
+                            <!-- Refeições serão carregadas aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 border rounded-lg bg-gray-50">
+                <h3 class="font-semibold text-gray-700 mb-2">Adicionar Refeição</h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <select id="refeicao-dia" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
+                        <option value="Segunda">Segunda</option>
+                        <option value="Terça">Terça</option>
+                        <option value="Quarta">Quarta</option>
+                        <option value="Quinta">Quinta</option>
+                        <option value="Sexta">Sexta</option>
+                        <option value="Sábado">Sábado</option>
+                        <option value="Domingo">Domingo</option>
+                    </select>
+                    <input type="text" id="refeicao-cafe" placeholder="Café da Manhã" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
+                    <input type="text" id="refeicao-almoco" placeholder="Almoço" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
+                    <input type="text" id="refeicao-jantar" placeholder="Jantar" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
+                    <button onclick="addRefeicao()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-xl font-semibold text-gray-700 mb-2">Lista de Compras</h3>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <ul id="lista-compras" class="list-disc list-inside space-y-1 text-gray-700">
+                        <!-- Lista de compras será gerada aqui -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab3" class="tab-content hidden">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Controle de Estoque (Despensa e Limpeza)</h2>
+            <div class="bg-yellow-50 p-4 rounded-lg">
+                <p class="text-yellow-700">Mantenha um inventário do que você tem em casa. Alertas serão exibidos para itens com estoque baixo.</p>
+            </div>
+            
+            <div class="mt-4 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantidade</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data de Validade</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="estoque-table-body" class="bg-white divide-y divide-gray-200">
+                        <!-- Estoque será carregado aqui -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-6 p-4 border rounded-lg bg-gray-50">
+                <h3 class="font-semibold text-gray-700 mb-2">Adicionar Item</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <input type="text" id="estoque-item" placeholder="Item" class="p-2 rounded-lg border focus:ring-yellow-500 focus:border-yellow-500">
+                    <input type="number" id="estoque-quantidade" placeholder="Quantidade" class="p-2 rounded-lg border focus:ring-yellow-500 focus:border-yellow-500">
+                    <input type="date" id="estoque-validade" placeholder="Data de Validade" class="p-2 rounded-lg border focus:ring-yellow-500 focus:border-yellow-500">
+                    <button onclick="addEstoqueItem()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Adicionar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab4" class="tab-content hidden">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Orçamento Doméstico</h2>
+            <div class="bg-purple-50 p-4 rounded-lg">
+                <p class="text-purple-700">Acompanhe suas finanças. Use o formulário abaixo para registrar receitas e despesas.</p>
+            </div>
+            
+            <div class="mt-4 flex flex-col md:flex-row gap-4">
+                <div class="flex-1 p-6 bg-gray-100 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-gray-700">Receitas Totais</h3>
+                    <p id="receitas-total" class="text-3xl font-bold text-green-600 mt-2">R$ 0,00</p>
+                </div>
+                <div class="flex-1 p-6 bg-gray-100 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-gray-700">Despesas Totais</h3>
+                    <p id="despesas-total" class="text-3xl font-bold text-red-600 mt-2">R$ 0,00</p>
+                </div>
+                <div class="flex-1 p-6 bg-gray-100 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-gray-700">Saldo</h3>
+                    <p id="saldo-total" class="text-3xl font-bold text-blue-600 mt-2">R$ 0,00</p>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="font-semibold text-gray-700 mb-2">Histórico de Transações</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descrição</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orcamento-table-body" class="bg-white divide-y divide-gray-200">
+                            <!-- Transações serão carregadas aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-4 border rounded-lg bg-gray-50">
+                <h3 class="font-semibold text-gray-700 mb-2">Adicionar Transação</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <input type="text" id="orcamento-descricao" placeholder="Descrição" class="p-2 rounded-lg border focus:ring-purple-500 focus:border-purple-500">
+                    <input type="number" id="orcamento-valor" placeholder="Valor" class="p-2 rounded-lg border focus:ring-purple-500 focus:border-purple-500">
+                    <select id="orcamento-tipo" class="p-2 rounded-lg border focus:ring-purple-500 focus:border-purple-500">
+                        <option value="receita">Receita</option>
+                        <option value="despesa">Despesa</option>
+                    </select>
+                    <button onclick="addOrcamentoItem()" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Adicionar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab5" class="tab-content hidden">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Organização de Tarefas Diárias e Semanais</h2>
+            <div class="bg-indigo-50 p-4 rounded-lg">
+                <p class="text-indigo-700">Crie e gerencie sua lista de tarefas, definindo prioridade, prazo e status.</p>
+            </div>
+            
+            <div class="mt-4 overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarefa</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prioridade</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prazo</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tarefas-table-body" class="bg-white divide-y divide-gray-200">
+                        <!-- Tarefas serão carregadas aqui -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-6 p-4 border rounded-lg bg-gray-50">
+                <h3 class="font-semibold text-gray-700 mb-2">Adicionar Nova Tarefa</h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <input type="text" id="tarefa-descricao" placeholder="Descrição" class="p-2 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500">
+                    <select id="tarefa-prioridade" class="p-2 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="Alta">Alta</option>
+                        <option value="Média">Média</option>
+                        <option value="Baixa">Baixa</option>
+                    </select>
+                    <input type="text" id="tarefa-prazo" placeholder="Prazo" class="p-2 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500">
+                    <select id="tarefa-status" class="p-2 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="Pendente">Pendente</option>
+                        <option value="Concluído">Concluído</option>
+                    </select>
+                    <button onclick="addTarefa()" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Adicionar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Custom Modal for Alerts -->
+    <div id="custom-alert-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center pb-3">
+                <p class="text-2xl font-bold">Aviso</p>
+                <div class="modal-close cursor-pointer z-50" onclick="hideModal()">
+                    <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="text-sm">
+                <p id="custom-alert-message"></p>
+            </div>
+            <div class="flex justify-end pt-2">
+                <button class="px-4 bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-600" onclick="hideModal()">Ok</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para mostrar o modal de aviso
+        function showAlert(message) {
+            const modal = document.getElementById('custom-alert-modal');
+            const modalMessage = document.getElementById('custom-alert-message');
+            modalMessage.textContent = message;
+            modal.style.display = 'flex';
+        }
+
+        // Função para esconder o modal
+        function hideModal() {
+            const modal = document.getElementById('custom-alert-modal');
+            modal.style.display = 'none';
+        }
+
+        // Função para alternar entre as abas
+        function showTab(tabId) {
+            // Esconde todas as abas
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            // Remove o estado 'active' de todos os botões
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+                button.classList.remove('bg-white');
+                button.classList.remove('text-blue-500');
+                button.classList.add('text-gray-600');
+                button.classList.remove('border-b-2');
+                button.classList.remove('border-blue-500');
+            });
+
+            // Mostra a aba selecionada
+            document.getElementById(tabId).classList.remove('hidden');
+
+            // Adiciona o estado 'active' ao botão clicado
+            const clickedButton = document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`);
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+                clickedButton.classList.add('bg-white');
+                clickedButton.classList.add('text-blue-500');
+                clickedButton.classList.remove('text-gray-600');
+                clickedButton.classList.add('border-b-2');
+                clickedButton.classList.add('border-blue-500');
+            }
+        }
+
+        // Função para remover uma linha da tabela e salvar os dados
+        function removeRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            saveData();
+        }
+
+        // --- Funções para Gerenciar Dados e Salvamento Automático ---
+        
+        // Salva todos os dados das planilhas no localStorage
+        function saveData() {
+            const data = {
+                limpeza: [],
+                refeicoes: [],
+                estoque: [],
+                orcamento: [],
+                tarefas: []
+            };
+
+            // Coleta dados do Cronograma de Limpeza
+            document.querySelectorAll('#limpeza-table-body tr').forEach(row => {
+                const cells = row.querySelectorAll('td');
+                data.limpeza.push({
+                    tarefa: cells[0].textContent,
+                    frequencia: cells[1].textContent,
+                    responsavel: cells[2].textContent,
+                    status: cells[3].textContent
+                });
+            });
+
+            // Coleta dados do Planejamento de Refeições
+            document.querySelectorAll('#refeicoes-table-body tr').forEach(row => {
+                const cells = row.querySelectorAll('td');
+                data.refeicoes.push({
+                    dia: cells[0].textContent,
+                    cafe: cells[1].textContent,
+                    almoco: cells[2].textContent,
+                    jantar: cells[3].textContent
+                });
+            });
+
+            // Coleta dados do Controle de Estoque
+            document.querySelectorAll('#estoque-table-body tr').forEach(row => {
+                const cells = row.querySelectorAll('td');
+                data.estoque.push({
+                    item: cells[0].textContent,
+                    quantidade: cells[1].textContent,
+                    validade: cells[2].textContent
+                });
+            });
+
+            // Coleta dados do Orçamento Doméstico
+            document.querySelectorAll('#orcamento-table-body tr').forEach(row => {
+                data.orcamento.push({
+                    descricao: row.cells[0].textContent,
+                    valor: parseFloat(row.getAttribute('data-valor')),
+                    tipo: row.getAttribute('data-tipo')
+                });
+            });
+
+            // Coleta dados da Organização de Tarefas
+            document.querySelectorAll('#tarefas-table-body tr').forEach(row => {
+                const cells = row.querySelectorAll('td');
+                data.tarefas.push({
+                    descricao: cells[0].textContent,
+                    prioridade: cells[1].textContent,
+                    prazo: cells[2].textContent,
+                    status: cells[3].textContent
+                });
+            });
+            
+            localStorage.setItem('planilhasDomesticasData', JSON.stringify(data));
+        }
+
+        // Carrega os dados do localStorage e renderiza as planilhas
+        function loadData() {
+            const storedData = localStorage.getItem('planilhasDomesticasData');
+            if (storedData) {
+                const data = JSON.parse(storedData);
+                
+                // Renderiza Limpeza
+                const limpezaBody = document.getElementById('limpeza-table-body');
+                limpezaBody.innerHTML = '';
+                data.limpeza.forEach(item => {
+                    limpezaBody.innerHTML += `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.tarefa}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.frequencia}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.responsavel}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${item.status === 'Concluído' ? 'text-green-500' : 'text-yellow-500'} font-semibold">${item.status}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="removeRow(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                // Renderiza Refeições
+                const refeicoesBody = document.getElementById('refeicoes-table-body');
+                refeicoesBody.innerHTML = '';
+                data.refeicoes.forEach(item => {
+                    refeicoesBody.innerHTML += `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.dia}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.cafe}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.almoco}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.jantar}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="removeRow(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                // Renderiza Estoque
+                const estoqueBody = document.getElementById('estoque-table-body');
+                estoqueBody.innerHTML = '';
+                data.estoque.forEach(item => {
+                    estoqueBody.innerHTML += `
+                        <tr class="${item.quantidade === '1' ? 'bg-red-100' : ''}">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.item}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.quantidade}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.validade}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="removeRow(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                // Renderiza Orçamento
+                const orcamentoBody = document.getElementById('orcamento-table-body');
+                orcamentoBody.innerHTML = '';
+                data.orcamento.forEach(item => {
+                    const valorFormatted = `R$ ${item.valor.toFixed(2).replace('.', ',')}`;
+                    const tipoText = item.tipo === 'receita' ? 'Receita' : 'Despesa';
+                    const colorClass = item.tipo === 'receita' ? 'text-green-500' : 'text-red-500';
+                    orcamentoBody.innerHTML += `
+                        <tr data-valor="${item.valor}" data-tipo="${item.tipo}">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.descricao}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${colorClass} font-semibold">${valorFormatted}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${tipoText}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="removeRowAndRecalculate(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                // Renderiza Tarefas
+                const tarefasBody = document.getElementById('tarefas-table-body');
+                tarefasBody.innerHTML = '';
+                data.tarefas.forEach(item => {
+                    const prioridadeColorClass = item.prioridade === 'Alta' ? 'text-red-500' : item.prioridade === 'Média' ? 'text-yellow-500' : 'text-green-500';
+                    const statusColorClass = item.status === 'Concluído' ? 'text-green-500' : 'text-yellow-500';
+                    tarefasBody.innerHTML += `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item.descricao}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${prioridadeColorClass} font-semibold">${item.prioridade}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.prazo}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm ${statusColorClass} font-semibold">${item.status}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button onclick="removeRow(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+        }
+        
+        // Funções para adicionar itens nas planilhas
+        
+        // Tab 1: Cronograma de Limpeza
+        function addLimpezaTask() {
+            const tarefa = document.getElementById('limpeza-tarefa').value.trim();
+            const frequencia = document.getElementById('limpeza-frequencia').value;
+            const responsavel = document.getElementById('limpeza-responsavel').value.trim();
+            
+            if (!tarefa || !responsavel) {
+                showAlert('Por favor, preencha todos os campos para adicionar uma tarefa de limpeza.');
+                return;
+            }
+
+            const tableBody = document.getElementById('limpeza-table-body');
+            const newRow = `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${tarefa}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${frequencia}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${responsavel}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-yellow-500 font-semibold">Pendente</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button onclick="removeRow(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += newRow;
+
+            document.getElementById('limpeza-tarefa').value = '';
+            document.getElementById('limpeza-responsavel').value = '';
+            saveData();
+        }
+
+        // Tab 2: Planejamento de Refeições
+        function addRefeicao() {
+            const dia = document.getElementById('refeicao-dia').value;
+            const cafe = document.getElementById('refeicao-cafe').value.trim();
+            const almoco = document.getElementById('refeicao-almoco').value.trim();
+            const jantar = document.getElementById('refeicao-jantar').value.trim();
+
+            if (!cafe || !almoco || !jantar) {
+                showAlert('Por favor, preencha todas as refeições do dia.');
+                return;
+            }
+
+            const tableBody = document.getElementById('refeicoes-table-body');
+            const newRow = `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${dia}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${cafe}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${almoco}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${jantar}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button onclick="removeRow(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += newRow;
+            
+            document.getElementById('refeicao-cafe').value = '';
+            document.getElementById('refeicao-almoco').value = '';
+            document.getElementById('refeicao-jantar').value = '';
+            saveData();
+        }
+        
+        // Tab 3: Controle de Estoque
+        function addEstoqueItem() {
+            const item = document.getElementById('estoque-item').value.trim();
+            const quantidade = document.getElementById('estoque-quantidade').value;
+            const validade = document.getElementById('estoque-validade').value;
+            
+            if (!item || !quantidade) {
+                showAlert('Por favor, preencha o item e a quantidade.');
+                return;
+            }
+
+            const tableBody = document.getElementById('estoque-table-body');
+            const newRow = `
+                <tr class="${quantidade === '1' ? 'bg-red-100' : ''}">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${item}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${quantidade}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${validade || 'N/A'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button onclick="removeRow(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += newRow;
+
+            document.getElementById('estoque-item').value = '';
+            document.getElementById('estoque-quantidade').value = '';
+            document.getElementById('estoque-validade').value = '';
+            saveData();
+        }
+        
+        // Tab 4: Orçamento Doméstico
+        function addOrcamentoItem() {
+            const descricao = document.getElementById('orcamento-descricao').value.trim();
+            const valor = parseFloat(document.getElementById('orcamento-valor').value);
+            const tipo = document.getElementById('orcamento-tipo').value;
+
+            if (!descricao || isNaN(valor)) {
+                showAlert('Por favor, preencha a descrição e o valor da transação.');
+                return;
+            }
+
+            const tableBody = document.getElementById('orcamento-table-body');
+            const valorFormatted = `R$ ${valor.toFixed(2).replace('.', ',')}`;
+            const tipoText = tipo === 'receita' ? 'Receita' : 'Despesa';
+            const colorClass = tipo === 'receita' ? 'text-green-500' : 'text-red-500';
+
+            const newRow = `
+                <tr data-valor="${valor}" data-tipo="${tipo}">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${descricao}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm ${colorClass} font-semibold">${valorFormatted}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${tipoText}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button onclick="removeRowAndRecalculate(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += newRow;
+
+            document.getElementById('orcamento-descricao').value = '';
+            document.getElementById('orcamento-valor').value = '';
+            
+            recalculateOrcamento();
+            saveData();
+        }
+
+        function removeRowAndRecalculate(button) {
+            removeRow(button);
+            recalculateOrcamento();
+        }
+
+        function recalculateOrcamento() {
+            let receitasTotal = 0;
+            let despesasTotal = 0;
+
+            document.querySelectorAll('#orcamento-table-body tr').forEach(row => {
+                const valor = parseFloat(row.getAttribute('data-valor'));
+                const tipo = row.getAttribute('data-tipo');
+                
+                if (tipo === 'receita') {
+                    receitasTotal += valor;
+                } else {
+                    despesasTotal += valor;
+                }
+            });
+
+            const saldo = receitasTotal - despesasTotal;
+
+            document.getElementById('receitas-total').textContent = `R$ ${saldo > 0 ? receitasTotal.toFixed(2).replace('.', ',') : (receitasTotal.toFixed(2).replace('.', ','))}`;
+            document.getElementById('despesas-total').textContent = `R$ ${saldo < 0 ? despesasTotal.toFixed(2).replace('.', ',') : (despesasTotal.toFixed(2).replace('.', ','))}`;
+            document.getElementById('saldo-total').textContent = `R$ ${saldo.toFixed(2).replace('.', ',')}`;
+
+            // Troca a cor do saldo dependendo do valor
+            const saldoEl = document.getElementById('saldo-total');
+            saldoEl.classList.remove('text-blue-600', 'text-green-600', 'text-red-600');
+            if (saldo > 0) {
+                saldoEl.classList.add('text-green-600');
+            } else if (saldo < 0) {
+                saldoEl.classList.add('text-red-600');
+            } else {
+                saldoEl.classList.add('text-blue-600');
+            }
+        }
+        
+        // Tab 5: Organização de Tarefas
+        function addTarefa() {
+            const descricao = document.getElementById('tarefa-descricao').value.trim();
+            const prioridade = document.getElementById('tarefa-prioridade').value;
+            const prazo = document.getElementById('tarefa-prazo').value.trim();
+            const status = document.getElementById('tarefa-status').value;
+
+            if (!descricao || !prazo) {
+                showAlert('Por favor, preencha a descrição e o prazo da tarefa.');
+                return;
+            }
+
+            const tableBody = document.getElementById('tarefas-table-body');
+            const prioridadeColorClass = prioridade === 'Alta' ? 'text-red-500' : prioridade === 'Média' ? 'text-yellow-500' : 'text-green-500';
+            const statusColorClass = status === 'Concluído' ? 'text-green-500' : 'text-yellow-500';
+            
+            const newRow = `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${descricao}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm ${prioridadeColorClass} font-semibold">${prioridade}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${prazo}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm ${statusColorClass} font-semibold">${status}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button onclick="removeRow(this)" class="text-red-600 hover:text-red-900">Remover</button>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += newRow;
+
+            document.getElementById('tarefa-descricao').value = '';
+            document.getElementById('tarefa-prazo').value = '';
+            saveData();
+        }
+
+        // Inicializa o aplicativo
+        window.onload = function() {
+            loadData();
+            showTab('tab1'); // Mostra a primeira aba por padrão
+            recalculateOrcamento(); // Calcula o orçamento inicial
+        };
+    </script>
+</body>
+</html>
