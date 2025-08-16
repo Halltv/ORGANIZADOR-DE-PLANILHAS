@@ -47,6 +47,26 @@
             padding: 20px;
             color: #4b5563;
         }
+        .fab-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #4f46e5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .fab-button:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
@@ -474,29 +494,45 @@
                     </select>
                     <button onclick="addTarefa()" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Adicionar</button>
                 </div>
-                
-                <!-- Nova seção de geração de tarefas com Gemini API -->
-                <div class="mt-6 p-4 border rounded-lg bg-indigo-100">
-                    <h3 class="font-semibold text-gray-700 mb-2">✨ Gerar Subtarefas com IA</h3>
-                    <p class="text-sm text-gray-600 mb-2">Digite uma tarefa complexa ou use o microfone para quebrar em passos simples.</p>
-                    <div class="flex flex-col md:flex-row gap-4">
-                        <div class="flex-1 relative">
-                            <input type="text" id="gemini-tarefa" placeholder="Ex: Organizar a garagem" class="w-full p-2 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 pr-10">
-                            <button id="mic-button" class="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-indigo-600 focus:outline-none focus:text-indigo-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a4 4 0 110-8 4 4 0 010 8z" />
-                                </svg>
-                            </button>
-                        </div>
-                        <button onclick="generateSubtasks()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">✨ Gerar Subtarefas ✨</button>
-                    </div>
-                    <div id="loading-indicator">
-                        <p>Gerando subtarefas, por favor aguarde...</p>
-                    </div>
-                </div>
             </div>
         </div>
 
+    </div>
+    
+    <!-- Floating Action Button for Gemini AI -->
+    <button class="fab-button" onclick="showGeminiModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+    </button>
+
+    <!-- Gemini AI Modal -->
+    <div id="gemini-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center pb-3">
+                <p class="text-2xl font-bold">✨ Gerar Subtarefas com IA</p>
+                <div class="modal-close cursor-pointer z-50" onclick="hideGeminiModal()">
+                    <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+                    </svg>
+                </div>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Digite uma tarefa complexa ou use o microfone para quebrar em passos simples.</p>
+            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                <div class="flex-1 relative">
+                    <input type="text" id="gemini-tarefa" placeholder="Ex: Organizar a garagem" class="w-full p-2 rounded-lg border focus:ring-indigo-500 focus:border-indigo-500 pr-10">
+                    <button id="mic-button" class="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-indigo-600 focus:outline-none focus:text-indigo-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a4 4 0 110-8 4 4 0 010 8z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button onclick="generateSubtasks()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">✨ Gerar Subtarefas ✨</button>
+            <div id="loading-indicator">
+                <p>Gerando subtarefas, por favor aguarde...</p>
+            </div>
+        </div>
     </div>
 
     <!-- Custom Modal for Alerts -->
@@ -531,6 +567,18 @@
         // Funcao para esconder o modal
         function hideModal() {
             const modal = document.getElementById('custom-alert-modal');
+            modal.style.display = 'none';
+        }
+
+        // Funcao para mostrar o modal do Gemini
+        function showGeminiModal() {
+            const modal = document.getElementById('gemini-modal');
+            modal.style.display = 'flex';
+        }
+
+        // Funcao para esconder o modal do Gemini
+        function hideGeminiModal() {
+            const modal = document.getElementById('gemini-modal');
             modal.style.display = 'none';
         }
 
