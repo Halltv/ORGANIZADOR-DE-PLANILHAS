@@ -1046,8 +1046,8 @@
                     }
                 }
                 
-                if (!response.ok) {
-                    throw new Error(`Erro da API: ${response.status} ${response.statusText}`);
+                if (!response || !response.ok) {
+                    throw new Error(`Erro da API: ${response?.status} ${response?.statusText}`);
                 }
 
                 const result = await response.json();
