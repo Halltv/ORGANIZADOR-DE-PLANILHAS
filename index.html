@@ -86,7 +86,7 @@
                         </tr>
                     </thead>
                     <tbody id="limpeza-table-body" class="bg-white divide-y divide-gray-200">
-                        <!-- Tarefas serão carregadas aqui -->
+                        <!-- Tarefas serao carregadas aqui -->
                     </tbody>
                 </table>
             </div>
@@ -94,7 +94,7 @@
             <div class="mt-6 p-4 border rounded-lg bg-gray-50">
                 <h3 class="font-semibold text-gray-700 mb-2">Adicionar Nova Tarefa</h3>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <input type="text" id="limpeza-tarefa" placeholder="Tarefa" class="col-span-1 md:col-span-1 p-2 rounded-lg border focus:ring-blue-500 focus:border-blue-500">
+                    <input type="text" id="limpeza-tarefa" placeholder="Tarefa" list="sugestoes-tarefas-limpeza" class="col-span-1 md:col-span-1 p-2 rounded-lg border focus:ring-blue-500 focus:border-blue-500">
                     <select id="limpeza-frequencia" class="p-2 rounded-lg border focus:ring-blue-500 focus:border-blue-500">
                         <option value="Diário">Diário</option>
                         <option value="Semanal">Semanal</option>
@@ -105,6 +105,51 @@
                     <button onclick="addLimpezaTask()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Adicionar</button>
                 </div>
             </div>
+
+            <!-- Lista de Sugestoes de Tarefas de Limpeza -->
+            <datalist id="sugestoes-tarefas-limpeza">
+                <option value="Limpar o banheiro">
+                <option value="Varrer e passar pano no chão da sala">
+                <option value="Lavar a louça">
+                <option value="Tirar o lixo">
+                <option value="Arrumar a cama">
+                <option value="Limpar os vidros e janelas">
+                <option value="Lavar a roupa">
+                <option value="Passar a roupa">
+                <option value="Guardar a roupa">
+                <option value="Limpar a geladeira">
+                <option value="Limpar o fogão e o micro-ondas">
+                <option value="Organizar a despensa">
+                <option value="Limpar os armários da cozinha">
+                <option value="Lavar o quintal">
+                <option value="Regar as plantas">
+                <option value="Limpar e organizar a área de serviço">
+                <option value="Varrer a calçada">
+                <option value="Limpar o carro">
+                <option value="Dar banho no pet">
+                <option value="Limpar a caixa de areia do gato">
+                <option value="Varrer e passar pano nos quartos">
+                <option value="Limpar as bancadas da cozinha">
+                <option value="Tirar o pó dos móveis">
+                <option value="Organizar os armários dos quartos">
+                <option value="Lavar as toalhas e lençóis">
+                <option value="Descongelar o freezer">
+                <option value="Limpar os tapetes">
+                <option value="Lavar cortinas">
+                <option value="Organizar o armário de sapatos">
+                <option value="Limpar os lustres e luminárias">
+                <option value="Varrer a varanda">
+                <option value="Limpar o aspirador de pó">
+                <option value="Lavar as janelas dos quartos">
+                <option value="Limpar o filtro do ar-condicionado">
+                <option value="Tirar o lixo da cozinha e banheiro">
+                <option value="Limpar e desinfetar o vaso sanitário">
+                <option value="Limpar a banheira ou box">
+                <option value="Limpar os espelhos">
+                <option value="Varrer o chão da cozinha">
+                <option value="Limpar o exaustor da cozinha">
+            </datalist>
+
         </div>
 
         <div id="tab2" class="tab-content hidden">
@@ -127,7 +172,7 @@
                             </tr>
                         </thead>
                         <tbody id="refeicoes-table-body" class="bg-white divide-y divide-gray-200">
-                            <!-- Refeições serão carregadas aqui -->
+                            <!-- Refeições serao carregadas aqui -->
                         </tbody>
                     </table>
                 </div>
@@ -145,18 +190,148 @@
                         <option value="Sábado">Sábado</option>
                         <option value="Domingo">Domingo</option>
                     </select>
-                    <input type="text" id="refeicao-cafe" placeholder="Café da Manhã" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
-                    <input type="text" id="refeicao-almoco" placeholder="Almoço" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
-                    <input type="text" id="refeicao-jantar" placeholder="Jantar" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
+                    <input type="text" id="refeicao-cafe" placeholder="Café da Manhã" list="sugestoes-cafe" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
+                    <input type="text" id="refeicao-almoco" placeholder="Almoço" list="sugestoes-almoco" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
+                    <input type="text" id="refeicao-jantar" placeholder="Jantar" list="sugestoes-jantar" class="p-2 rounded-lg border focus:ring-green-500 focus:border-green-500">
                     <button onclick="addRefeicao()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">Adicionar</button>
                 </div>
             </div>
+
+            <!-- Listas de Sugestoes de Cardapio -->
+            <datalist id="sugestoes-cafe">
+                <option value="Ovos mexidos com torradas">
+                <option value="Iogurte com granola e frutas">
+                <option value="Panquecas com xarope de bordo">
+                <option value="Smoothie de frutas e espinafre">
+                <option value="Cuscuz com manteiga e queijo">
+                <option value="Pão na chapa com requeijão">
+                <option value="Vitamina de banana e aveia">
+                <option value="Tapioca com ovo e queijo">
+                <option value="Pão de queijo e café com leite">
+                <option value="Mingau de aveia com frutas">
+                <option value="Torrada com abacate e ovo poché">
+                <option value="Waffles com frutas vermelhas">
+                <option value="Crepioca com recheio de frango">
+                <option value="Suco de laranja e bolo de fubá">
+                <option value="Biscoitos de água e sal com geleia">
+                <option value="Pudim de chia com manga">
+                <option value="Sanduíche natural de peito de peru">
+                <option value="Creme de milho e café preto">
+                <option value="Café com leite e bolachas">
+                <option value="Pão francês com geleia">
+                <option value="Panqueca de banana">
+                <option value="Cuscuz com carne seca e queijo">
+                <option value="Omelete com tomate e queijo">
+                <option value="Frutas picadas e café expresso">
+                <option value="Bolo de cenoura com cobertura">
+                <option value="Salada de frutas com iogurte">
+                <option value="Torradas com geleia de morango">
+                <option value="Ovos fritos com bacon">
+                <option value="Sanduíche de queijo quente">
+                <option value="Pão integral com cream cheese">
+                <option value="Vitamina de frutas vermelhas">
+                <option value="Bolo de laranja e suco natural">
+                <option value="Panquecas de chocolate">
+                <option value="Café e biscoito de polvilho">
+                <option value="Ovo cozido com sal e pimenta">
+                <option value="Banana amassada com aveia e mel">
+                <option value="Torradas com pasta de amendoim">
+                <option value="Suco verde e castanhas">
+                <option value="Misto quente na airfryer">
+                <option value="Bolinho de chuva com café">
+            </datalist>
+
+            <datalist id="sugestoes-almoco">
+                <option value="Arroz, feijão, bife acebolado, salada">
+                <option value="Macarrão com molho de tomate e almôndegas">
+                <option value="Frango grelhado, purê de batata e legumes cozidos">
+                <option value="Salada de atum com milho e batata palha">
+                <option value="Risoto de frango com queijo">
+                <option value="Lasanha à bolonhesa com salada verde">
+                <option value="Feijoada completa com couve e laranja">
+                <option value="Nhoque de batata com molho branco">
+                <option value="Peixe assado com batatas e brócolis">
+                <option value="Yakimeshi (arroz chinês) com legumes e frango">
+                <option value="Bife à parmegiana com arroz e batatas fritas">
+                <option value="Estrogonofe de carne com arroz e batata palha">
+                <option value="Panqueca de carne moída com queijo">
+                <option value="Escondidinho de carne seca com purê de mandioca">
+                <option value="Salmão assado com purê de abóbora e aspargos">
+                <option value="Macarrão com molho pesto e tomate cereja">
+                <option value="Omelete recheado com queijo e presunto">
+                <option value="Carne moída com legumes e arroz">
+                <option value="Frango à milanesa, arroz e salada de repolho">
+                <option value="Caldo de feijão e torradas">
+                <option value="Wrap de frango com vegetais">
+                <option value="Salada Caesar com frango">
+                <option value="Lombo assado, farofa e salada de maionese">
+                <option value="Cuscuz com carne moída">
+                <option value="Arroz de forno com frango e milho">
+                <option value="Torta de frango com salada">
+                <option value="Purê de mandioquinha com carne">
+                <option value="Berinjela à parmegiana">
+                <option value="Batata assada recheada com queijo e bacon">
+                <option value="Sopa de legumes com pão">
+                <option value="Arroz, feijão, ovo frito e batata frita">
+                <option value="Espaguete à carbonara">
+                <option value="Salada de macarrão com frango desfiado">
+                <option value="Filé de peixe empanado com purê">
+                <option value="Quibe assado com salada de pepino">
+                <option value="Virado à paulista">
+                <option value="Frango com quiabo e polenta">
+                <option value="Almôndegas ao sugo com purê">
+                <option value="Lentilha com arroz e salada">
+                <option value="Galinhada mineira">
+            </datalist>
+
+            <datalist id="sugestoes-jantar">
+                <option value="Sopa de abóbora com gengibre">
+                <option value="Sanduíche natural e suco">
+                <option value="Panqueca de frango com molho branco">
+                <option value="Omelete de queijo com salada">
+                <option value="Pizza de marguerita caseira">
+                <option value="Crepe de presunto e queijo">
+                <option value="Salada com frango desfiado e croutons">
+                <option value="Tostex de queijo e tomate">
+                <option value="Sopa de cebola com queijo gratinado">
+                <option value="Mini hambúrgueres caseiros">
+                <option value="Omelete de legumes">
+                <option value="Arroz com carne e ovo">
+                <option value="Frango xadrez com arroz branco">
+                <option value="Sopa de macarrão com carne">
+                <option value="Tacos de carne moída com sour cream">
+                <option value="Salada de grão de bico com atum">
+                <option value="Batata recheada com frango e requeijão">
+                <option value="Creme de mandioquinha com carne seca">
+                <option value="Frango cozido com batata doce">
+                <option value="Filé de salmão com legumes no vapor">
+                <option value="Risoto de cogumelos">
+                <option value="Torta de liquidificador de frango">
+                <option value="Macarrão com sardinha e brócolis">
+                <option value="Sopa de legumes e carne">
+                <option value="Ovos mexidos com salada">
+                <option value="Lombo suíno assado com farofa">
+                <option value="Espaguete ao alho e óleo com brócolis">
+                <option value="Pão com ovo frito e café com leite">
+                <option value="Salada de couve-flor e ovo cozido">
+                <option value="Wrap de frango com vegetais">
+                <option value="Feijão tropeiro com bisteca">
+                <option value="Frango assado com salada">
+                <option value="Macarrão com molho branco e brócolis">
+                <option value="Sanduíche de atum">
+                <option value="Torta de frango com salada">
+                <option value="Caldo de feijão e torradas">
+                <option value="Salada de macarrão com atum">
+                <option value="Bife a rolê com purê">
+                <option value="Feijão verde com nata">
+                <option value="Arroz de forno com frango">
+            </datalist>
 
             <div class="mt-6">
                 <h3 class="text-xl font-semibold text-gray-700 mb-2">Lista de Compras</h3>
                 <div class="bg-gray-100 p-4 rounded-lg">
                     <ul id="lista-compras" class="list-disc list-inside space-y-1 text-gray-700">
-                        <!-- Lista de compras será gerada aqui -->
+                        <!-- Lista de compras sera gerada aqui -->
                     </ul>
                 </div>
             </div>
@@ -179,7 +354,7 @@
                         </tr>
                     </thead>
                     <tbody id="estoque-table-body" class="bg-white divide-y divide-gray-200">
-                        <!-- Estoque será carregado aqui -->
+                        <!-- Estoque sera carregado aqui -->
                     </tbody>
                 </table>
             </div>
@@ -229,7 +404,7 @@
                             </tr>
                         </thead>
                         <tbody id="orcamento-table-body" class="bg-white divide-y divide-gray-200">
-                            <!-- Transações serão carregadas aqui -->
+                            <!-- Transações serao carregadas aqui -->
                         </tbody>
                     </table>
                 </div>
@@ -267,7 +442,7 @@
                         </tr>
                     </thead>
                     <tbody id="tarefas-table-body" class="bg-white divide-y divide-gray-200">
-                        <!-- Tarefas serão carregadas aqui -->
+                        <!-- Tarefas serao carregadas aqui -->
                     </tbody>
                 </table>
             </div>
@@ -314,7 +489,7 @@
     </div>
 
     <script>
-        // Função para mostrar o modal de aviso
+        // Funcao para mostrar o modal de aviso
         function showAlert(message) {
             const modal = document.getElementById('custom-alert-modal');
             const modalMessage = document.getElementById('custom-alert-message');
@@ -322,19 +497,19 @@
             modal.style.display = 'flex';
         }
 
-        // Função para esconder o modal
+        // Funcao para esconder o modal
         function hideModal() {
             const modal = document.getElementById('custom-alert-modal');
             modal.style.display = 'none';
         }
 
-        // Função para alternar entre as abas
+        // Funcao para alternar entre as abas
         function showTab(tabId) {
             // Esconde todas as abas
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.add('hidden');
             });
-            // Remove o estado 'active' de todos os botões
+            // Remove o estado 'active' de todos os botoes
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
                 button.classList.remove('bg-white');
@@ -347,7 +522,7 @@
             // Mostra a aba selecionada
             document.getElementById(tabId).classList.remove('hidden');
 
-            // Adiciona o estado 'active' ao botão clicado
+            // Adiciona o estado 'active' ao botao clicado
             const clickedButton = document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`);
             if (clickedButton) {
                 clickedButton.classList.add('active');
@@ -359,14 +534,14 @@
             }
         }
 
-        // Função para remover uma linha da tabela e salvar os dados
+        // Funcao para remover uma linha da tabela e salvar os dados
         function removeRow(button) {
             const row = button.closest('tr');
             row.remove();
             saveData();
         }
 
-        // --- Funções para Gerenciar Dados e Salvamento Automático ---
+        // --- Funcoes para Gerenciar Dados e Salvamento Automatico ---
         
         // Salva todos os dados das planilhas no localStorage
         function saveData() {
@@ -389,7 +564,7 @@
                 });
             });
 
-            // Coleta dados do Planejamento de Refeições
+            // Coleta dados do Planejamento de Refeicoes
             document.querySelectorAll('#refeicoes-table-body tr').forEach(row => {
                 const cells = row.querySelectorAll('td');
                 data.refeicoes.push({
@@ -410,7 +585,7 @@
                 });
             });
 
-            // Coleta dados do Orçamento Doméstico
+            // Coleta dados do Orcamento Domestico
             document.querySelectorAll('#orcamento-table-body tr').forEach(row => {
                 data.orcamento.push({
                     descricao: row.cells[0].textContent,
@@ -419,7 +594,7 @@
                 });
             });
 
-            // Coleta dados da Organização de Tarefas
+            // Coleta dados da Organizacao de Tarefas
             document.querySelectorAll('#tarefas-table-body tr').forEach(row => {
                 const cells = row.querySelectorAll('td');
                 data.tarefas.push({
@@ -456,7 +631,7 @@
                     `;
                 });
 
-                // Renderiza Refeições
+                // Renderiza Refeicoes
                 const refeicoesBody = document.getElementById('refeicoes-table-body');
                 refeicoesBody.innerHTML = '';
                 data.refeicoes.forEach(item => {
@@ -489,7 +664,7 @@
                     `;
                 });
 
-                // Renderiza Orçamento
+                // Renderiza Orcamento
                 const orcamentoBody = document.getElementById('orcamento-table-body');
                 orcamentoBody.innerHTML = '';
                 data.orcamento.forEach(item => {
@@ -529,7 +704,7 @@
             }
         }
         
-        // Funções para adicionar itens nas planilhas
+        // Funcoes para adicionar itens nas planilhas
         
         // Tab 1: Cronograma de Limpeza
         function addLimpezaTask() {
@@ -561,7 +736,7 @@
             saveData();
         }
 
-        // Tab 2: Planejamento de Refeições
+        // Tab 2: Planejamento de Refeicoes
         function addRefeicao() {
             const dia = document.getElementById('refeicao-dia').value;
             const cafe = document.getElementById('refeicao-cafe').value.trim();
@@ -569,7 +744,7 @@
             const jantar = document.getElementById('refeicao-jantar').value.trim();
 
             if (!cafe || !almoco || !jantar) {
-                showAlert('Por favor, preencha todas as refeições do dia.');
+                showAlert('Por favor, preencha todas as refeicoes do dia.');
                 return;
             }
 
@@ -623,14 +798,14 @@
             saveData();
         }
         
-        // Tab 4: Orçamento Doméstico
+        // Tab 4: Orcamento Domestico
         function addOrcamentoItem() {
             const descricao = document.getElementById('orcamento-descricao').value.trim();
             const valor = parseFloat(document.getElementById('orcamento-valor').value);
             const tipo = document.getElementById('orcamento-tipo').value;
 
             if (!descricao || isNaN(valor)) {
-                showAlert('Por favor, preencha a descrição e o valor da transação.');
+                showAlert('Por favor, preencha a descricao e o valor da transacao.');
                 return;
             }
 
@@ -680,8 +855,8 @@
 
             const saldo = receitasTotal - despesasTotal;
 
-            document.getElementById('receitas-total').textContent = `R$ ${saldo > 0 ? receitasTotal.toFixed(2).replace('.', ',') : (receitasTotal.toFixed(2).replace('.', ','))}`;
-            document.getElementById('despesas-total').textContent = `R$ ${saldo < 0 ? despesasTotal.toFixed(2).replace('.', ',') : (despesasTotal.toFixed(2).replace('.', ','))}`;
+            document.getElementById('receitas-total').textContent = `R$ ${receitasTotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('despesas-total').textContent = `R$ ${despesasTotal.toFixed(2).replace('.', ',')}`;
             document.getElementById('saldo-total').textContent = `R$ ${saldo.toFixed(2).replace('.', ',')}`;
 
             // Troca a cor do saldo dependendo do valor
@@ -696,7 +871,7 @@
             }
         }
         
-        // Tab 5: Organização de Tarefas
+        // Tab 5: Organizacao de Tarefas
         function addTarefa() {
             const descricao = document.getElementById('tarefa-descricao').value.trim();
             const prioridade = document.getElementById('tarefa-prioridade').value;
@@ -704,7 +879,7 @@
             const status = document.getElementById('tarefa-status').value;
 
             if (!descricao || !prazo) {
-                showAlert('Por favor, preencha a descrição e o prazo da tarefa.');
+                showAlert('Por favor, preencha a descricao e o prazo da tarefa.');
                 return;
             }
 
@@ -733,8 +908,8 @@
         // Inicializa o aplicativo
         window.onload = function() {
             loadData();
-            showTab('tab1'); // Mostra a primeira aba por padrão
-            recalculateOrcamento(); // Calcula o orçamento inicial
+            showTab('tab1'); // Mostra a primeira aba por padrao
+            recalculateOrcamento(); // Calcula o orcamento inicial
         };
     </script>
 </body>
